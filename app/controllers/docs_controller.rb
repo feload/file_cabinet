@@ -2,7 +2,8 @@ class DocsController < ApplicationController
   before_action :find_doc, only: [:show, :edit, :update, :destroy]
   
   def index
-    @docs = Doc.all.order("created_at desc")
+    # @docs = current_user.docs.order("created_at desc") # alternative 1.
+    @docs = Doc.where(user_id: current_user)             # alternative 2.
   end
   
   def show
